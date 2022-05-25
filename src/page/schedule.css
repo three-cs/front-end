@@ -1,0 +1,12 @@
+.rdp-month, 
+.rdp-table {
+  min-width: 100%;
+}
+
+.rdp-cell {
+  padding: 10px 20px;
+}
+
+.rdp .event-modifier {
+  background-color: green;
+}
