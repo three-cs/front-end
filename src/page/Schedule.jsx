@@ -1,8 +1,8 @@
-import { useState, useTransition, useEffect } from 'react';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
-import './schedule.css';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getEvents } from '../service/event';
+import Loading from '../component/Loading';
+import Calendar from '../component/calendar/Calendar';
 
 const Schedule = () => {
   const [clicked, setClicked] = useState(new Date());
@@ -18,20 +18,11 @@ const Schedule = () => {
 
   const whileLoading = () => {
     if (events.length === 0) {
-      return <button aria-busy="true">Loading Events...</button>
+      return <Loading />
     } else {
-      const dates = events.map(event => new Date(Date.parse(event.startAt)));
       return <>
         <article>
-          <DayPicker 
-            mode="single" 
-            selected={dates} 
-            onDayClick={handleDayClick}
-            modifiers={{ event: dates }}
-            modifiersClassNames={{
-              event: 'event-modifier'
-            }}
-            />
+          <Calendar events={events} onDayClick={handleDayClick} />
         </article>
         <article>
           {events
@@ -43,6 +34,8 @@ const Schedule = () => {
               return <details key={event.id}>
                 <summary>{event.summary}</summary>
                 <p>Event at : {event.startAt}</p>
+                <p><Link to={`/event/${event.id}`}>Event</Link></p>
+                {event.contact && <p><Link to={`/people/${event.contact}`}>Person</Link></p>}
               </details>
             })}
         </article>

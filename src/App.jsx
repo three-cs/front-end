@@ -7,10 +7,12 @@ import {
 import { Container, Row, Col } from "react-bootstrap";
 
 import Home from './page/Home';
-import People from "./page/People";
+import Contacts from "./page/Contacts";
+import Contact from './page/Contact';
 import NotFound from './page/NotFound';
 import Settings from "./page/Settings";
 import Schedule from "./page/Schedule";
+import Event from './page/Event';
 
 const App = () => {
   return (
@@ -26,8 +28,8 @@ const App = () => {
               <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/people">People</Link></li>
-                <li><Link to="/settings">Settings</Link></li>
                 <li><Link to="/schedule">Schedule</Link></li>
+                <li><Link to="/settings">Settings</Link></li>
               </ul>
             </nav>
           </aside>
@@ -35,9 +37,11 @@ const App = () => {
           <Col xs="8">
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route path="/people" element={<People />} />
+              <Route path="/people" element={<Contacts />} />
+              <Route path="/people/:id" element={<Contact />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/schedule" element={<Schedule />} />
+              <Route path="/event/:id" element={<Event />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Col>
